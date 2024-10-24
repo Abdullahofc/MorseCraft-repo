@@ -1,204 +1,48 @@
-﻿using System;
-using System.Collections;
-namespace Triesdsa
-{
-    public class Tries
+#include <iostream> 
+ #include <cstring>
+ #include<cstdlib>
+  using namespace std; 
+  const int b=100;
+  int main() 
+ { 
+  char name1[500];
+  string name2,name4="A..-`B-..`C--..`D--.`E---`F..-.-`G..--`H.---`I---`J-...`K.-.-`L---`....`N.--.`M-.-.`O---`P....`Q.....`R-.-..`S--.-`T---`U.--.`V---.`W-.-.`X...-.`Y-.--`Z--`1....`2.--.`3----`4.--`5--./`6-.--`7---`8-.-`9----`0---`?!!`,....`.!!` -../`-()`.{}`";
+  int count=0,kk=0,a=0;
+  std::cout<<"enter a string ";
+  cin.getline(name1,b);
+  std::cout<<"size "<<name4.size()<<endl;
+  for(count=0;count<strlen(name1);count++)
+  {
+    if(name1[count]=='.'||name1[count]=='-')
     {
-        private class Node
-        {
-            public char value;
-            public Dictionary<char,Node> node = new Dictionary<char,Node>();
-            public bool isendofword;
-            public Node()
-            {
-                
-            }
-            public Node(char va)
-            {
-                this.value= va;
-            }
-            public Node[] getchildren()
-            {
-                return node.Values.ToArray();
-            }
-            public bool check_child(Node node)
-            {
-                return node?.value==null;
-            }
-            public bool has_child()
-            {
-                return node.Count==0;
-            }
-            public void remove_child(char ch)
-            {
-                node.Remove(ch);
-            }
-            public Node getchild(char va)
-            {
-                return node[va];
-            }
-        }
-        private Node root=new Node(' ');
-        public void insert(string val)
-        {
-            var current=root;
-            foreach (var item in val)
-            {
-                if (!current.node.ContainsKey(item))
-                {
-                    current.node[item]   = new Node(item);
-                }
-                    current = current.node[item];
-            }
-                current.isendofword = true;
-            }
-        public void Preorder()
-        {
-            Preorder(root);
-        }
-        private void Preorder(Node root)
-        {
-            Console.WriteLine(root.value);
-           foreach(var child in root.getchildren())
-            {
-                Preorder(child);
-            }
-        }
-            public bool contain(string ch)
-            {
-            if(ch == null) return false;
-            string word="";
-            var current = root;
-             foreach (var item in ch)
-            {
-                    if (!current.node.ContainsKey(item))
-                    {
-                    Console.WriteLine("match word " + word);
-                    return false;
-                    }
-                     word += item;
-                    current = current.node[item];
-            }
-            Console.WriteLine("match word "+word);
-            return current.isendofword;
-            }
-        public void revmove(string word)
-        {
-            if(word==null) return;
-            remove(root,word,0,new Node());
-        }
-        private void remove(Node root,string word,int count,Node previos)
-        {
-            int i = word.Length-1;
-                foreach (var item in root.getchildren())
-                {
-                if (count != i+1)
-                {
-                    if (item.value == word[count])
-                    {
-                        if (item.isendofword && count == i)
-                        {
-                            item.isendofword = false;
-                            delete(previos);
-                            Console.WriteLine("done");
-                            return ;
-                        }
-                        if (item.isendofword)
-                        {
-                              previos = item;
-                        }
-                        count++;
-                    }
-                }
-                remove(item, word, count,previos);
-            }
-        }
-        private void delete(Node previos)
-        {
-               foreach(var item in previos.getchildren())
-               {
-                delete(item);
-                if (item.node.Count==0 && !item.isendofword)
-                  {
-                    previos.node.Remove(item.value);
-                  }
-               }
-        }
-        public void revove_mosh(string word)
-        {
-            revove_mosh(root, word,0);
-        }
-        private void revove_mosh(Node node,string word,int index)
-        {
-            if(index==word.Length)
-            {
-                node.isendofword=false;
-                return;
-            }
-            var ch = word[index];
-            var child= node.getchild(ch);
-            if(child==null)
-            {
-                return;
-            }
-            revove_mosh(child, word, index + 1);
-            if(node.has_child()&&!node.isendofword)
-            {
-                node.remove_child(ch);
-            }
-        }
-        public void auto_complition(string word)
-        {
-            auto_complition(root, word, new List<string>());
-        }
-        private void auto_complition(Node node,string word,List<string>  words)
-        {
-             foreach(Node node1 in node.getchildren())
-            {
-                if(node1.isendofword)
-                {
-                    words.Add(word);
-                }
-                auto_complition(node1, word, words);
-            }
-        }
-        public void find_word(string ch)
-        {
-            find_word(root,ch,0);
-        }
-        private void find_word(Node root,string ch,int index)
-        {
-            foreach(var item in root.getchildren())
-            {
-                if (item.value == ch[index]&&item.isendofword)
-                {
-                    find_word(item, ch, index);
-                }
-            }
-        }
-    }
-    public class Program
-    {
-        static void Main(string[] args)
-        {
-
-            Tries tries = new Tries();
-            tries.insert("pic");
-            tries.insert("picture");
-            tries.insert("pickle");
-            //tries.insert("pictures");
-
-            Console.WriteLine(tries.contain("picture"));
-
-            tries.revove_mosh("picture");
-            Console.WriteLine(tries.contain("picture"));
-            Console.WriteLine(tries.contain("pickle"));
-            //Console.WriteLine(tries.contain("pictures"));
-        }
-
-    }
-}
-
-
-
+      kk=225;
+        kk=name4.find(name1[count],kk);
+        
+         while(name4[kk]!='`')
+     {
       
+   std:: cout<<name4[kk];
+    kk++;
+     }
+     a=0;
+    kk=0;
+    continue;
+    }
+     kk=name4.find(toupper(name1[count]),kk);
+     
+     while(name4[kk]!='`')
+     {
+      if(a==0)
+      {
+       std:: cout<<" ";
+        kk++;
+        a++;
+      }
+   std:: cout<<name4[kk];
+    kk++;
+     }
+     a=0;
+    kk=0;
+  }   
+
+ }
